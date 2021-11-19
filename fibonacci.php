@@ -2,10 +2,6 @@
 /**
  * Template Name: fibonacci
  * Template Post Type: post, page
- *
- * @package WordPress
- * @subpackage fibonacci
- * @since fibonacci
  */
 function mathFibonacci($n)
 {
@@ -16,9 +12,7 @@ function loopFibonacci($n)
 {
     $first = 0;
     $second = 1;
-
     for ($i = 1; $i < $n; $i++) {
-
         $sum = $first + $second;
         $first = $second;
         $second = $sum;
@@ -28,38 +22,39 @@ function loopFibonacci($n)
 
 function tailRecursionFibonacci($n)
 {
-    if ($n < 3) {
-        return 1;
-    } else {
-        return TailRecursionFibonacci($n - 1) + TailRecursionFibonacci($n - 2);
-    }
+    return recursionFibonacci($n);
 }
 
 function recursionFibonacci($n, $first = 0, $second = 1)
 {
     $sum = $first + $second;
     if ($n !== 2) {
-        $first = $second;
-        $second = $sum;
-        $n--;
+        calculateRecursionFibonacci($first, $second, $sum, $n);
+
         return recursionFibonacci($n, $first, $second);
-    } else {
-        return $sum;
     }
+    return $sum;
+}
+
+function calculateRecursionFibonacci(&$first, &$second, $sum, &$n)
+{
+    $first = $second;
+    $second = $sum;
+    $n--;
 }
 
 $start = microtime(true);
-echo "math: " . mathFibonacci(15);
-echo ' Время выполнения скрипта: ' . (microtime(true) - $start) . ' sec.' . "<br/>";
+echo "math: " . mathFibonacci(100);
+echo ' Время выполнения скрипта: ' . (microtime(true) - $start) * 100000 . "\n";
 
 $start = microtime(true);
-echo "loop: " . loopFibonacci(15);
-echo ' Время выполнения скрипта: ' . (microtime(true) - $start) . ' sec.' . "<br/>";
+echo "loop: " . loopFibonacci(100);
+echo ' Время выполнения скрипта: ' . (microtime(true) - $start) * 100000 . "\n";
 
 $start = microtime(true);
-echo "tailRecursion: " . tailRecursionFibonacci(15), ' ';
-echo ' Время выполнения скрипта: ' . (microtime(true) - $start) . ' sec.' . "<br/>";
+echo "tailRecursion: " . tailRecursionFibonacci(100), ' ';
+echo ' Время выполнения скрипта: ' . (microtime(true) - $start) * 100000 . "\n";
 
 $start = microtime(true);
-echo "recursion: " . recursionFibonacci(15);
-echo ' Время выполнения скрипта: ' . (microtime(true) - $start) . ' sec.' . "<br/>";
+echo "recursion: " . recursionFibonacci(100);
+echo ' Время выполнения скрипта: ' . (microtime(true) - $start) * 100000 . "\n";
