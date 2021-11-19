@@ -3,12 +3,12 @@
  * Template Name: fibonacci
  * Template Post Type: post, page
  */
-function mathFibonacci($n)
+function mathFibonacci(int $n): int
 {
     return round(pow((sqrt(5) + 1) / 2, $n) / sqrt(5));
 }
 
-function loopFibonacci($n)
+function loopFibonacci(int $n): int
 {
     $first = 0;
     $second = 1;
@@ -20,41 +20,61 @@ function loopFibonacci($n)
     return $sum;
 }
 
-function tailRecursionFibonacci($n)
+function recursionFibonacci(int $n): int
 {
-    return recursionFibonacci($n);
-}
-
-function recursionFibonacci($n, $first = 0, $second = 1)
-{
-    $sum = $first + $second;
-    if ($n !== 2) {
-        calculateRecursionFibonacci($first, $second, $sum, $n);
-
-        return recursionFibonacci($n, $first, $second);
+    if ($n == 0) {
+        return 0;
     }
-    return $sum;
+    if ($n == 1) {
+        return 1;
+    }
+    return recursionFibonacci($n - 1) + recursionFibonacci($n - 2);
 }
 
-function calculateRecursionFibonacci(&$first, &$second, $sum, &$n)
+function tailRecursionFibonacci(int $n, int $first = 0, int $second = 1): int
 {
-    $first = $second;
-    $second = $sum;
-    $n--;
+    if ($n == 0) {
+        return $first;
+    }
+    if ($n == 1) {
+        return $second;
+    }
+    return tailRecursionFibonacci(--$n, $second, $first + $second);
 }
 
+$limit = 1000000;
 $start = microtime(true);
-echo "math: " . mathFibonacci(100);
-echo ' Время выполнения скрипта: ' . (microtime(true) - $start) * 100000 . "\n";
+$n = 8;
+while ($n < $limit) {
+    $n++;
+    mathFibonacci(8);
+}
+echo "math: ";
+echo ' Время выполнения скрипта: ' . (microtime(true) - $start) . "\n";
 
 $start = microtime(true);
-echo "loop: " . loopFibonacci(100);
-echo ' Время выполнения скрипта: ' . (microtime(true) - $start) * 100000 . "\n";
+$n = 8;
+while ($n < $limit) {
+    $n++;
+    loopFibonacci(8);
+}
+echo "loop: ";
+echo 'Время выполнения скрипта: ' . (microtime(true) - $start) . "\n";
 
 $start = microtime(true);
-echo "tailRecursion: " . tailRecursionFibonacci(100), ' ';
-echo ' Время выполнения скрипта: ' . (microtime(true) - $start) * 100000 . "\n";
+$n = 8;
+while ($n < $limit) {
+    $n++;
+    tailRecursionFibonacci(8);
+}
+echo "tailRecursion: ";
+echo 'Время выполнения скрипта: ' . (microtime(true) - $start) . "\n";
 
 $start = microtime(true);
-echo "recursion: " . recursionFibonacci(100);
-echo ' Время выполнения скрипта: ' . (microtime(true) - $start) * 100000 . "\n";
+$n = 8;
+while ($n < $limit) {
+    $n++;
+    recursionFibonacci(8);
+}
+echo "recursion: ";
+echo 'Время выполнения скрипта: ' . (microtime(true) - $start) . "\n";
