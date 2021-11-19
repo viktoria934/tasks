@@ -1,0 +1,6 @@
+Write a function that finds the first Fibonacci number greater or equal 100 digits.
+Use type hinting and return type declaration with strict mode enabled;
+
+Your solution:
+should contain PHPUnit test. Test should complete successfully;
+should have no warnings or errors.
