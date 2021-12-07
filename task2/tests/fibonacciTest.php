@@ -12,7 +12,6 @@ class fibonacciTest extends \PHPUnit\Framework\TestCase
         parent::setUp();
     }
 
-
     public function test_loopFibonacci()
     {
         $result = $this->fibonacci->loopFibonacci();
