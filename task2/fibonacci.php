@@ -7,17 +7,16 @@ class Fibonacci
      * @param string $n
      * @return string
      */
-    public function loopFibonacci(string $n): string
+    public function loopFibonacci(): string
     {
         $first = '0';
         $second = '1';
-        for ($i = 1; $i < $n; $i++) {
+        $sum = "";
+
+        while (strlen($sum) <= 100) {
             $sum = $this->sum($first, $second);
             $first = $second;
             $second = $sum;
-            if (strlen($sum) >= 100) {
-                return $sum;
-            }
         }
         return $sum;
     }
@@ -65,5 +64,5 @@ class Fibonacci
 }
 
 $fibonacci = new Fibonacci();
-echo $fibonacci->loopFibonacci('8') . PHP_EOL;
+echo $fibonacci->loopFibonacci() . PHP_EOL;
 
