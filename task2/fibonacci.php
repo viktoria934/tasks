@@ -13,7 +13,7 @@ class Fibonacci
         $second = '1';
         $sum = "";
 
-        while (strlen($sum) <= 100) {
+        while (strlen($sum) < 100) {
             $sum = $this->sum($first, $second);
             $first = $second;
             $second = $sum;
