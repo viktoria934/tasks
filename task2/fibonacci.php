@@ -30,8 +30,6 @@ class Fibonacci
     {
         $result = '';
         $ten = 0;
-
-
         $first = $this->addZeros($first, $second);
 
         for ($i = strlen($second) - 1; $i >= 0; $i--) {

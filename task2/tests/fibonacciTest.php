@@ -15,7 +15,7 @@ class fibonacciTest extends \PHPUnit\Framework\TestCase
 
     public function test_loopFibonacci()
     {
-        $result = $this->fibonacci->loopFibonacci('10000');
+        $result = $this->fibonacci->loopFibonacci();
         $this->assertIsNumeric($result);
     }
 
@@ -52,6 +52,11 @@ class fibonacciTest extends \PHPUnit\Framework\TestCase
             ['20', '5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555', '0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020'],
             ['10', '55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555556666666', '00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010'],
         ];
+    }
+
+    public function test_length()
+    {
+        $this->assertSame(100, strlen($this->fibonacci->loopFibonacci()), 'method loopFibonacci is correct');
     }
 }
 
