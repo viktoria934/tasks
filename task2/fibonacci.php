@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 class Fibonacci
 {
@@ -55,3 +55,4 @@ class Fibonacci
 
 $fibonacci = new Fibonacci();
 echo $fibonacci->loopFibonacci('10000');
+
