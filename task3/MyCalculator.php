@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 class MyCalculator
 {
-    private $first, $second;
     public $result;
+    private $first, $second;
 
     public function __construct(int $first, int $second)
     {
