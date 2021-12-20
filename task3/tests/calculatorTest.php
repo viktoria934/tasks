@@ -14,32 +14,32 @@ class calculatorTest extends \PHPUnit\Framework\TestCase
 
     public function test_addition()
     {
-        $result = $this->myCalculator->addition();
-        $this->assertSame(18, $result->result, 'method addition is incorrect');
+        $result = (string)$this->myCalculator->addition();
+        $this->assertSame('18', $result, 'method addition is incorrect');
     }
 
     public function test_subtraction()
     {
-        $result = $this->myCalculator->subtraction();
-        $this->assertSame(6, $result->result, 'method subtraction is incorrect');
+        $result = (string)$this->myCalculator->subtraction();
+        $this->assertSame('6', $result, 'method subtraction is incorrect');
     }
 
     public function test_multiplication()
     {
-        $result = $this->myCalculator->multiplication();
-        $this->assertSame(72, $result->result, 'method multiplication is incorrect');
+        $result = (string)$this->myCalculator->multiplication();
+        $this->assertSame('72', $result, 'method multiplication is incorrect');
     }
 
     public function test_division()
     {
-        $result = $this->myCalculator->division();
-        $this->assertSame(2, $result->result, 'method division is incorrect');
+        $result = (string)$this->myCalculator->division();
+        $this->assertSame('2', $result, 'method division is incorrect');
     }
 
     public function test_divisionBy()
     {
-        $result = $this->myCalculator->addition()->divisionBy(9);
-        $this->assertSame(2, $result->result, 'method addition+divisionBy is incorrect');
+        $result = (string)$this->myCalculator->addition()->divisionBy(9);
+        $this->assertSame('2', $result, 'method addition+divisionBy is incorrect');
     }
 }
 

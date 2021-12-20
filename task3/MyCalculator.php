@@ -3,8 +3,9 @@ declare(strict_types=1);
 
 class MyCalculator
 {
-    public $result;
-    private $first, $second;
+    private int $first;
+    private int $second;
+    private int $result;
 
     public function __construct(int $first, int $second)
     {
@@ -12,40 +13,53 @@ class MyCalculator
         $this->second = $second;
     }
 
-    public function addition(): object
+    public function __toString(): string
     {
-        $this->result += $this->first + $this->second;
-        printf('addition: %s' . "\n", $this->result);
+        return (string)$this->result;
+    }
+
+    public function addition(): self
+    {
+        $this->result = $this->first + $this->second;
         return $this;
     }
 
-    public function subtraction(): object
+    public function subtraction(): self
     {
         $this->result = $this->first - $this->second;
-        printf('subtraction: %s' . "\n", $this->result);
         return $this;
     }
 
-    public function multiplication(): object
+    public function multiplication(): self
     {
         $this->result = $this->first * $this->second;
-        printf('multiplication: %s' . "\n", $this->result);
+
         return $this;
     }
 
-    public function division(): object
+    public function division(): self
     {
-        $this->result = $this->first / $this->second;
-        printf('division: %s' . "\n", $this->result);
+        $this->result = $this->divisionByZero($this->second, $this->first);
         return $this;
     }
 
-    public function divisionBy($third): object
+    public function divisionBy(int $third): self
     {
-        printf('division: %s' . "\n", $this->result /= ($third));
+        $this->result = $this->divisionByZero($third, $this->result);
         return $this;
+    }
+
+    public function divisionByZero(int $number, int $result): int
+    {
+        if ($number != 0) {
+            $result /= $number;
+        } else {
+            $result = 0;
+        }
+        return $result;
     }
 }
 
 $mycalc = new MyCalculator(12, 6);
-$mycalc->addition()->divisionBy(9);
+
+echo $mycalc->addition()->divisionBy(9);
