@@ -88,12 +88,11 @@ class MyCalculator
      */
     public function checkingDivisionByZero(float $number, float $result): float
     {
-        if ($number != 0) {
-            $result = $number / $result;
-        } else {
+        if ($number === 0) {
             throw new Exception('Division by zero.');
         }
-        return $result;
+        
+        return $number / $result;
     }
 }
 
