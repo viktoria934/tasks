@@ -8,7 +8,7 @@ class calculatorTest extends \PHPUnit\Framework\TestCase
 
     public function setUp(): void
     {
-        $this->myCalculator = new MyCalculator(12, 6);
+        $this->myCalculator = new MyCalculator(18, 2);
         parent::setUp();
     }
 
@@ -33,13 +33,20 @@ class calculatorTest extends \PHPUnit\Framework\TestCase
     public function test_division()
     {
         $result = (string)$this->myCalculator->division();
-        $this->assertSame('2', $result, 'method division is incorrect');
+        $this->assertSame('9', $result, 'method division is incorrect');
     }
 
     public function test_divisionBy()
     {
         $result = (string)$this->myCalculator->addition()->divisionBy(9);
         $this->assertSame('2', $result, 'method addition+divisionBy is incorrect');
+    }
+
+    public function test_checkingDivisionByZero()
+    {
+        $result = (string)$this->myCalculator->addition()->divisionBy(0);
+        var_dump($result);
+        $this->assertSame('18', $result, 'method checkingDivisionByZero is incorrect');
     }
 }
 

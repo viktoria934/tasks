@@ -3,33 +3,50 @@ declare(strict_types=1);
 
 class MyCalculator
 {
-    private int $first;
-    private int $second;
-    private int $result;
+    private float $first;
+    private float $second;
+    private float $result;
 
-    public function __construct(int $first, int $second)
+    /**
+     * MyCalculator constructor.
+     * @param float $first
+     * @param float $second
+     */
+    public function __construct(float $first, float $second)
     {
         $this->first = $first;
         $this->second = $second;
     }
 
+    /**
+     * @return string
+     */
     public function __toString(): string
     {
         return (string)$this->result;
     }
 
+    /**
+     * @return $this
+     */
     public function addition(): self
     {
         $this->result = $this->first + $this->second;
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function subtraction(): self
     {
         $this->result = $this->first - $this->second;
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function multiplication(): self
     {
         $this->result = $this->first * $this->second;
@@ -37,24 +54,44 @@ class MyCalculator
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function division(): self
     {
-        $this->result = $this->divisionByZero($this->second, $this->first);
+        try {
+            $this->result = $this->checkingDivisionByZero($this->first, $this->second);
+        } catch (Exception $e) {
+            echo 'An exception was thrown: ', $e->getMessage(), "\n";
+        }
         return $this;
     }
 
-    public function divisionBy(int $third): self
+    /**
+     * @param float $third
+     * @return $this
+     */
+    public function divisionBy(float $third): self
     {
-        $this->result = $this->divisionByZero($third, $this->result);
+        try {
+            $this->result = $this->checkingDivisionByZero($this->result, $third);
+        } catch (Exception $e) {
+            echo 'An exception was thrown: ', $e->getMessage(), "\n";
+        }
         return $this;
     }
 
-    public function divisionByZero(int $number, int $result): int
+    /**
+     * @param float $number
+     * @param float $result
+     * @return float
+     */
+    public function checkingDivisionByZero(float $number, float $result): float
     {
         if ($number != 0) {
-            $result /= $number;
+            $result = $number / $result;
         } else {
-            $result = 0;
+            throw new Exception('Division by zero.');
         }
         return $result;
     }
