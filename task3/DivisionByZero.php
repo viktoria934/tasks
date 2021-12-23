@@ -5,7 +5,8 @@
  */
 class DivisionByZero extends Exception
 {
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct("Division by zero.");
     }
 }
