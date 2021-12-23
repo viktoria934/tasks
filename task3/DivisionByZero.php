@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Определим свой класс исключения
+ * Define exception class for checking division by zero
  */
 class DivisionByZero extends Exception
 {
