@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../MyCalculator.php';
+require_once __DIR__ . '/../DivisionByZero.php';
 
 class calculatorTest extends \PHPUnit\Framework\TestCase
 {
@@ -8,7 +9,7 @@ class calculatorTest extends \PHPUnit\Framework\TestCase
 
     public function setUp(): void
     {
-        $this->myCalculator = new MyCalculator(18, 2);
+        $this->myCalculator = new MyCalculator(12, 6);
         parent::setUp();
     }
 
@@ -33,7 +34,7 @@ class calculatorTest extends \PHPUnit\Framework\TestCase
     public function test_division()
     {
         $result = (string)$this->myCalculator->division();
-        $this->assertSame('9', $result, 'method division is incorrect');
+        $this->assertSame('2', $result, 'method division is incorrect');
     }
 
     public function test_divisionBy()
@@ -42,11 +43,14 @@ class calculatorTest extends \PHPUnit\Framework\TestCase
         $this->assertSame('2', $result, 'method addition+divisionBy is incorrect');
     }
 
-    public function test_checkingDivisionByZero()
+    /**
+     * @throws Exception
+     */
+    public function test_divisionByZero()
     {
-        $result = (string)$this->myCalculator->addition()->divisionBy(0);
-        var_dump($result);
-        $this->assertSame('18', $result, 'method checkingDivisionByZero is incorrect');
+        $this->expectException(DivisionByZero::class);
+        $myCalculator = new MyCalculator(12, 0);
+        $myCalculator->division();
     }
 }
 

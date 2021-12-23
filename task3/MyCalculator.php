@@ -1,16 +1,24 @@
 <?php
 declare(strict_types=1);
 
+require_once "./DivisionByZero.php";
+
+/**
+ * Сlass does addition, subtraction, division, multiplication operations between two numbers
+ */
 class MyCalculator
 {
+    /** @var float first number */
     private float $first;
+    /** @var float second number */
     private float $second;
-    private float $result;
+    /** @var float result between first and second */
+    private ?float $result = null;
 
     /**
      * MyCalculator constructor.
-     * @param float $first
-     * @param float $second
+     * @param float $first First number
+     * @param float $second Second number
      */
     public function __construct(float $first, float $second)
     {
@@ -28,24 +36,29 @@ class MyCalculator
 
     /**
      * @return $this
+     * Function does addition between two numbers
      */
     public function addition(): self
     {
         $this->result = $this->first + $this->second;
+
         return $this;
     }
 
     /**
      * @return $this
+     * Function does subtraction between two numbers
      */
     public function subtraction(): self
     {
         $this->result = $this->first - $this->second;
+
         return $this;
     }
 
     /**
      * @return $this
+     * Function does multiplication between two numbers
      */
     public function multiplication(): self
     {
@@ -56,28 +69,26 @@ class MyCalculator
 
     /**
      * @return $this
+     * @throws Exception
+     * Function does division between two numbers
      */
     public function division(): self
     {
-        try {
-            $this->result = $this->checkingDivisionByZero($this->first, $this->second);
-        } catch (Exception $e) {
-            echo 'An exception was thrown: ', $e->getMessage(), "\n";
-        }
+        $this->result = $this->checkingDivisionByZero($this->first, $this->second);
+
         return $this;
     }
 
     /**
      * @param float $third
      * @return $this
+     * @throws Exception
+     * Function does division between two numbers
      */
     public function divisionBy(float $third): self
     {
-        try {
-            $this->result = $this->checkingDivisionByZero($this->result, $third);
-        } catch (Exception $e) {
-            echo 'An exception was thrown: ', $e->getMessage(), "\n";
-        }
+        $this->result = $this->checkingDivisionByZero($this->result, $third);
+
         return $this;
     }
 
@@ -85,17 +96,23 @@ class MyCalculator
      * @param float $number
      * @param float $result
      * @return float
+     * @throws Exception
+     * Function checks division by zero
      */
     public function checkingDivisionByZero(float $number, float $result): float
     {
-        if ($number === 0) {
-            throw new Exception('Division by zero.');
+        if ((int)$result === 0) {
+            throw new DivisionByZero();
         }
-        
+
         return $number / $result;
     }
 }
 
-$mycalc = new MyCalculator(12, 6);
+$mycalc = new MyCalculator(12, 0);
+try {
+    echo $mycalc->division();
+} catch (DivisionByZero $divisionByZero) {
+    echo $divisionByZero->getMessage();
+}
 
-echo $mycalc->addition()->divisionBy(9);
